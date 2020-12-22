@@ -1,4 +1,19 @@
+/* Elements */
+
+header {
+  text-align: center;
+}
+
+/* Classes */
+
+
+
+/* Id's */
+
 #hidden {
   display: none;
 }
 
+#site-description {
+  background-color: rgb(206, 199, 199);
+}
