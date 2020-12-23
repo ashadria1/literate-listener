@@ -10,58 +10,19 @@ $(document).ready(function () {
   // Comments go here.
   // Comments go here.
   // */
-  var bookList = $("#books-list");
 
-  // Example usage of the two APIs.
-  searchOpenLibrary({
-    title: "The Lord of the Rings",
-    author: "tolkein",
-  }).then(function (response) {
-    console.log(response);
 
-    $("#site-description").attr("style", "display: none");
-    $("#hidden").attr("style", "display: block");
-
-    for (var i = 0; i < 10; i++) {
-      var responseImg = response.docs[i].cover_i;
-      var bookResult = $("<div>").attr("style", "display:flex");
-      var textResult = $("<div>").addClass("ps-2 flex-grow-1");
-      var searchBtn = $("<button>").text("Podcast");
-      var bookTitle = $("<div>").text(response.docs[i].title);
-      var authorText = $("<div>").text(response.docs[i].author_name);
-      var coverImage = $("<img>").attr(
-        "src",
-        "http://covers.openlibrary.org/b/id/" + responseImg + "-M.jpg"
-      );
-      var bookLink = $("<a>").text(
-        "For complete book description, click here."
-      );
-      bookLink.attr("href", "https://openlibrary.org/" + response.docs[i].key);
-
-      textResult.append(bookTitle, authorText, bookLink);
-      bookResult.append(coverImage, textResult, searchBtn);
-      bookList.append(bookResult);
-    }
-
-    // getBookInformation(response.docs[0].key).then(function (bookResponse) {
-    //   console.log("Hello ", bookResponse);
-
-    //   var description = $("<div>").text(bookResponse.description);
-    //   textResult.append(description);
-    // });
-  });
-
-  listenApiSearch({
-    q: "The Lord of the Rings",
-  }).then(function (response) {
-    console.log(response);
-    showPodcastEpisodeResults(response.results);
-    listenApiGetPodcast(response.results[0].podcast.id).then(function (
-      podResponse
-    ) {
-      console.log(podResponse);
-    });
-  });
+  // listenApiSearch({
+  //   q: "The Lord of the Rings",
+  // }).then(function (response) {
+  //   console.log(response);
+  //   showPodcastEpisodeResults(response.results);
+  //   listenApiGetPodcast(response.results[0].podcast.id).then(function (
+  //     podResponse
+  //   ) {
+  //     console.log(podResponse);
+  //   });
+  // });
 });
 
 /*
@@ -145,42 +106,99 @@ function listenApiGetPodcast(podcastId) {
 }
 
 function showPodcastEpisodeResults(results) {
-    // Empty container element
-    $('#site-description').addClass('d-none');
-    $('#podcast-list').empty().attr('style', 'display: block;');
+  // Empty container element
+  $('#site-description').addClass('d-none');
+  $('#podcast-list').empty().attr('style', 'display: block;');
 
-    results.forEach(function (item) {
-        var div = $('<div>').addClass('clearfix border');
-        var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
-        var epTitle = $('<p>').text(item.title_original);
-        var podTitle = $('<p>').text(item.podcast.title_original);
-        var epDesc = $('<p>').text(item.description_original);
-        var genresDiv = $('<p>');
-        // item.podcast.genre_ids.forEach(function (id) {
-        //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
-        //     genresDiv.append(span);
-        // });
-        div.append(img, epTitle, podTitle, epDesc, genresDiv);
-        $('#podcast-list').append(div);
-    });
+  results.forEach(function (item) {
+    var div = $('<div>').addClass('clearfix border');
+    var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
+    var epTitle = $('<p>').text(item.title_original);
+    var podTitle = $('<p>').text(item.podcast.title_original);
+    var epDesc = $('<p>').text(item.description_original);
+    var genresDiv = $('<p>');
+    // item.podcast.genre_ids.forEach(function (id) {
+    //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
+    //     genresDiv.append(span);
+    // });
+    div.append(img, epTitle, podTitle, epDesc, genresDiv);
+    $('#podcast-list').append(div);
+  });
 }
 
 function showPodcastResults(results) {
-    // Empty container element
-    $('#site-description').addClass('d-none');
-    $('#podcast-list').empty().addClass('d-block');
+  // Empty container element
+  $('#site-description').addClass('d-none');
+  $('#podcast-list').empty().addClass('d-block');
 
-    results.forEach(function (item) {
-        var div = $('<div>').addClass('clearfix border');
-        var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
-        var podTitle = $('<p>').text(item.title_original);
-        var podDesc = $('<p>').text(item.description_original);
-        var genresDiv = $('<p>');
-        // item.podcast.genre_ids.forEach(function (id) {
-        //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
-        //     genresDiv.append(span);
-        // });
-        div.append(img, podTitle, podDesc);
-        $('#podcast-list').append(div);
-    });
+  results.forEach(function (item) {
+    var div = $('<div>').addClass('clearfix border');
+    var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
+    var podTitle = $('<p>').text(item.title_original);
+    var podDesc = $('<p>').text(item.description_original);
+    var genresDiv = $('<p>');
+    // item.podcast.genre_ids.forEach(function (id) {
+    //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
+    //     genresDiv.append(span);
+    // });
+    div.append(img, podTitle, podDesc);
+    $('#podcast-list').append(div);
+  });
 }
+
+$("#search-button").on("click", function (event) {
+  event.preventDefault();
+  var inputTitle = $("#book-search").val().trim();
+  var inputAuthor = $("#author-search").val().trim();
+
+
+  var queryObj = {}
+  if (inputAuthor !== '') {
+    queryObj.author = inputAuthor;
+  }
+
+  if (inputTitle !== '') {
+    queryObj.title = inputTitle;
+  }
+
+  // Example usage of the two APIs.
+  searchOpenLibrary(queryObj).then(function (response) {
+    console.log(response);
+
+    $("#site-description").attr("style", "display: none");
+    $("#hidden").attr("style", "display: block");
+    var bookList = $("#books-list");
+
+    for (var i = 0; i < 10; i++) {
+
+      var responseImg = response.docs[i].cover_i;
+      var bookResult = $("<div>").attr("style", "display:flex");
+      var textResult = $("<div>").addClass("ps-2 flex-grow-1");
+      var searchBtn = $("<button>").text("Podcast");
+      var bookTitle = $("<div>").text(response.docs[i].title);
+      var authorText = $("<div>").text(response.docs[i].author_name);
+      var coverImage = $("<img>").attr(
+        "src",
+        "http://covers.openlibrary.org/b/id/" + responseImg + "-M.jpg"
+      );
+      var bookLink = $("<a>").text(
+        "For complete book description, click here."
+      );
+      bookLink.attr("href", "https://openlibrary.org/" + response.docs[i].key);
+
+      textResult.append(bookTitle, authorText, bookLink);
+      bookResult.append(coverImage, textResult, searchBtn);
+      bookList.append(bookResult);
+    }
+
+    // getBookInformation(response.docs[0].key).then(function (bookResponse) {
+    //   console.log("Hello ", bookResponse);
+
+    //   var description = $("<div>").text(bookResponse.description);
+    //   textResult.append(description);
+    // });
+  });
+
+
+
+})
