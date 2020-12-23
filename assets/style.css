@@ -15,5 +15,8 @@ header {
 }
 
 #site-description {
-  background-color: rgb(206, 199, 199);
+  font-family: Garamond, serif;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: white;
 }
