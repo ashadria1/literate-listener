@@ -22,18 +22,27 @@ $(document).ready(function () {
     $("#site-description").attr("style", "display: none");
     $("#hidden").attr("style", "display: block");
 
+    var responseImg = response.docs[0].cover_i;
     var bookResult = $("<div>").attr("style", "display:flex");
+    var textResult = $("<div>").addClass("ps-2 flex-grow-1");
     var searchBtn = $("<button>").text("Podcast");
     var bookTitle = $("<div>").text(response.docs[0].title);
     var authorText = $("<div>").text(response.docs[0].author_name);
-
-    bookResult.append(searchBtn, bookTitle, authorText);
+    var coverImage = $("<img>").attr("src", "http://covers.openlibrary.org/b/id/" + responseImg + "-M.jpg");
+    var bookLink = $("<a>").text("For complete book description, click here.");
+    bookLink.attr("href", "https://openlibrary.org/" + response.docs[0].key);
+    
+    textResult.append(bookTitle, authorText, bookLink);
+    bookResult.append(coverImage, textResult, searchBtn);
     bookList.append(bookResult);
 
 
-    getBookInformation(response.docs[0].key).then(function (bookResponse) {
-      console.log(bookResponse);
-    });
+    // getBookInformation(response.docs[0].key).then(function (bookResponse) {
+    //   console.log("Hello ", bookResponse);
+
+    //   var description = $("<div>").text(bookResponse.description);
+    //   textResult.append(description);
+    // });
   });
 
 
