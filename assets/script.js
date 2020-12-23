@@ -52,9 +52,10 @@ $(document).ready(function () {
   });
 
   listenApiSearch({
-    q: "the zodiac killer",
+    q: "The Lord of the Rings",
   }).then(function (response) {
     console.log(response);
+    showPodcastEpisodeResults(response.results);
     listenApiGetPodcast(response.results[0].podcast.id).then(function (
       podResponse
     ) {
