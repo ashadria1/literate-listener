@@ -145,42 +145,54 @@ function listenApiGetPodcast(podcastId) {
 }
 
 function showPodcastEpisodeResults(results) {
-    // Empty container element
-    $('#site-description').addClass('d-none');
-    $('#podcast-list').empty().attr('style', 'display: block;');
+  // Empty container element
+  $('#site-description').addClass('d-none');
+  $('#podcast-list').empty().attr('style', 'display: block;');
 
-    results.forEach(function (item) {
-        var div = $('<div>').addClass('clearfix border');
-        var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
-        var epTitle = $('<p>').text(item.title_original);
-        var podTitle = $('<p>').text(item.podcast.title_original);
-        var epDesc = $('<p>').text(item.description_original);
-        var genresDiv = $('<p>');
-        // item.podcast.genre_ids.forEach(function (id) {
-        //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
-        //     genresDiv.append(span);
-        // });
-        div.append(img, epTitle, podTitle, epDesc, genresDiv);
-        $('#podcast-list').append(div);
-    });
+  results.forEach(function (item) {
+    var div = $('<div>').addClass('clearfix border');
+    var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
+    var epTitle = $('<p>').text(item.title_original);
+    var podTitle = $('<p>').text(item.podcast.title_original);
+    var epDesc = $('<p>').text(item.description_original);
+    var genresDiv = $('<p>');
+    // item.podcast.genre_ids.forEach(function (id) {
+    //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
+    //     genresDiv.append(span);
+    // });
+    div.append(img, epTitle, podTitle, epDesc, genresDiv);
+    $('#podcast-list').append(div);
+  });
 }
 
 function showPodcastResults(results) {
-    // Empty container element
-    $('#site-description').addClass('d-none');
-    $('#podcast-list').empty().addClass('d-block');
+  // Empty container element
+  $('#site-description').addClass('d-none');
+  $('#podcast-list').empty().addClass('d-block');
 
-    results.forEach(function (item) {
-        var div = $('<div>').addClass('clearfix border');
-        var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
-        var podTitle = $('<p>').text(item.title_original);
-        var podDesc = $('<p>').text(item.description_original);
-        var genresDiv = $('<p>');
-        // item.podcast.genre_ids.forEach(function (id) {
-        //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
-        //     genresDiv.append(span);
-        // });
-        div.append(img, podTitle, podDesc);
-        $('#podcast-list').append(div);
-    });
+  results.forEach(function (item) {
+    var div = $('<div>').addClass('clearfix border');
+    var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
+    var podTitle = $('<p>').text(item.title_original);
+    var podDesc = $('<p>').text(item.description_original);
+    var genresDiv = $('<p>');
+    // item.podcast.genre_ids.forEach(function (id) {
+    //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
+    //     genresDiv.append(span);
+    // });
+    div.append(img, podTitle, podDesc);
+    $('#podcast-list').append(div);
+  });
 }
+
+$("#search-button").on("click", function (event) {
+  event.preventDefault();
+  var inputTitle = $("#book-search").val().trim();
+  var inputAuthor = $("#author-search").val().trim();
+
+  console.log(inputTitle);
+  console.log(inputAuthor);
+
+
+
+})
