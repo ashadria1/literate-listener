@@ -113,3 +113,44 @@ function listenApiGetPodcast(podcastId) {
     },
   });
 }
+
+function showPodcastEpisodeResults(results) {
+    // Empty container element
+    $('#site-description').addClass('d-none');
+    $('#hidden').empty().attr('style', 'display: block;');
+
+    results.forEach(function (item) {
+        var div = $('<div>').addClass('clearfix border');
+        var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
+        var epTitle = $('<p>').text(item.title_original);
+        var podTitle = $('<p>').text(item.podcast.title_original);
+        var epDesc = $('<p>').text(item.description_original);
+        var genresDiv = $('<p>');
+        // item.podcast.genre_ids.forEach(function (id) {
+        //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
+        //     genresDiv.append(span);
+        // });
+        div.append(img, epTitle, podTitle, epDesc, genresDiv);
+        $('#hidden').append(div);
+    });
+}
+
+function showPodcastResults(results) {
+    // Empty container element
+    $('#site-description').addClass('d-none');
+    $('#hidden').empty().addClass('d-block');
+
+    results.forEach(function (item) {
+        var div = $('<div>').addClass('clearfix border');
+        var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
+        var podTitle = $('<p>').text(item.title_original);
+        var podDesc = $('<p>').text(item.description_original);
+        var genresDiv = $('<p>');
+        // item.podcast.genre_ids.forEach(function (id) {
+        //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
+        //     genresDiv.append(span);
+        // });
+        div.append(img, podTitle, podDesc);
+        $('#hidden').append(div);
+    });
+}
