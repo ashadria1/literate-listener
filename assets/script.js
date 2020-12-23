@@ -10,6 +10,7 @@ $(document).ready(function () {
   // Comments go here.
   // Comments go here.
   // */
+  var bookList = $("#books-list");
 
   // Example usage of the two APIs.
   searchOpenLibrary({
@@ -17,10 +18,34 @@ $(document).ready(function () {
     author: 'tolkein',
   }).then(function (response) {
     console.log(response);
-    getBookInformation(response.docs[0].key).then(function (bookResponse) {
-      console.log(bookResponse);
-    });
+
+    $("#site-description").attr("style", "display: none");
+    $("#hidden").attr("style", "display: block");
+
+    var responseImg = response.docs[0].cover_i;
+    var bookResult = $("<div>").attr("style", "display:flex");
+    var textResult = $("<div>").addClass("ps-2 flex-grow-1");
+    var searchBtn = $("<button>").text("Podcast");
+    var bookTitle = $("<div>").text(response.docs[0].title);
+    var authorText = $("<div>").text(response.docs[0].author_name);
+    var coverImage = $("<img>").attr("src", "http://covers.openlibrary.org/b/id/" + responseImg + "-M.jpg");
+    var bookLink = $("<a>").text("For complete book description, click here.");
+    bookLink.attr("href", "https://openlibrary.org/" + response.docs[0].key);
+    
+    textResult.append(bookTitle, authorText, bookLink);
+    bookResult.append(coverImage, textResult, searchBtn);
+    bookList.append(bookResult);
+
+
+    // getBookInformation(response.docs[0].key).then(function (bookResponse) {
+    //   console.log("Hello ", bookResponse);
+
+    //   var description = $("<div>").text(bookResponse.description);
+    //   textResult.append(description);
+    // });
   });
+
+
 
   listenApiSearch({
     q: 'the zodiac killer',
@@ -112,6 +137,7 @@ function listenApiGetPodcast(podcastId) {
       'X-ListenAPI-Key': listenKey,
     },
   });
+<<<<<<< HEAD
 }
 
 function showPodcastEpisodeResults(results) {
@@ -153,4 +179,9 @@ function showPodcastResults(results) {
         div.append(img, podTitle, podDesc);
         $('#hidden').append(div);
     });
+=======
+
+
+
+>>>>>>> main
 }

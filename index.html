@@ -24,7 +24,7 @@
       <div class="row mt-5">
         <div class="col-sm-4 mx-auto">
           <form>
-            <div class="mb-3" id="user-search">
+            <div class="mb-3">
               <label for="book-search" class="form-label"
                 >Enter Book Title</label
               >
@@ -36,13 +36,13 @@
               />
             </div>
 
-            <div class="mb-3" id="user-search">
+            <div class="mb-3">
               <label for="book-search" class="form-label">Enter Author</label>
               <input
                 placeholder="Author"
                 type="text"
                 class="form-control"
-                id="book-search"
+                id="author-search"
               />
             </div>
 
@@ -86,15 +86,22 @@
       <div class="row mt-5" id="content">
         <div class="col-sm-6 mx-auto p-5" id="site-description">
           Welcome to The Literate Listener -- bringing together your favorite
-          books and your love of podcasts. 
-          <br>
-          <br>
-          To get started finding related
-          podcasts, simply enter the book's title or author above.
-          
+          books and your love of podcasts.
+          <br />
+          <br />
+          To get started finding related podcasts, simply enter the book's title
+          or author above.
         </div>
         <div class="col-sm-10" id="hidden">
-          This is where our books and podcasts will populate.
+          <div class="row">
+            <!-- Books column -->
+            <div class="col-6" id="books-list">
+              <!-- Button, Book Title, description, cover picture -->
+            </div>
+
+            <!-- Podcast column -->
+            <div class="col-6"></div>
+          </div>
         </div>
       </div>
     </div>
