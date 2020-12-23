@@ -1,3 +1,4 @@
+var listenKey = '4f3fcf91ea69455db9ab9bad6c285f61';
 $(document).ready(function () {
   console.log('Hello world!');
   // /*
@@ -9,6 +10,8 @@ $(document).ready(function () {
   // Comments go here.
   // Comments go here.
   // */
+
+  // Example usage of the two APIs.
   searchOpenLibrary({
     title: 'The Lord of the Rings',
     author: 'tolkein',
@@ -18,10 +21,21 @@ $(document).ready(function () {
       console.log(bookResponse);
     });
   });
+
+  listenApiSearch({
+    q: 'the zodiac killer',
+  }).then(function (response) {
+    console.log(response);
+    listenApiGetPodcast(response.results[0].podcast.id).then(function (
+      podResponse
+    ) {
+      console.log(podResponse);
+    });
+  });
 });
 
 /*
- * Expects an object in the form of 
+ * Expects an object in the form of
  *{
  *    title: "The Lord of the Rings",
  *    author: "Tolkein"
@@ -55,5 +69,47 @@ function getBookInformation(bookKey) {
   return $.ajax({
     url: queryUrl,
     method: 'GET',
+  });
+}
+
+/*
+ * searchQuery should be an object with at least a q property and any of the optional parameters
+ * specified by the API docs.
+ * {
+ *   q: 'my favorite murder'
+ * }
+ * returns the jQuery ajax promise
+ */
+function listenApiSearch(searchQuery) {
+  if (typeof searchQuery !== 'object') {
+    return;
+  }
+  var baseUrl = 'https://listen-api.listennotes.com/api/v2/search?';
+  var queryUrl = (baseUrl += $.param(searchQuery));
+  return $.ajax({
+    url: queryUrl,
+    method: 'GET',
+    headers: {
+      'X-ListenAPI-Key': listenKey,
+    },
+  });
+}
+
+/*
+ * Expects the ID of the podcast to get more information for.
+ * Returns the jQuery ajax promise.
+ */
+function listenApiGetPodcast(podcastId) {
+  if (podcastId === null || podcastId === undefined) {
+    return;
+  }
+  var baseUrl = 'https://listen-api.listennotes.com/api/v2/podcasts/';
+  var fullUrl = baseUrl + podcastId;
+  return $.ajax({
+    url: fullUrl,
+    method: 'GET',
+    headers: {
+      'X-ListenAPI-Key': listenKey,
+    },
   });
 }
