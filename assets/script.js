@@ -10,6 +10,7 @@ $(document).ready(function () {
   // Comments go here.
   // Comments go here.
   // */
+  var bookList = $("#books-list");
 
   // Example usage of the two APIs.
   searchOpenLibrary({
@@ -17,10 +18,25 @@ $(document).ready(function () {
     author: 'tolkein',
   }).then(function (response) {
     console.log(response);
+
+    $("#site-description").attr("style", "display: none");
+    $("#hidden").attr("style", "display: block");
+
+    var bookResult = $("<div>").attr("style", "display:flex");
+    var searchBtn = $("<button>").text("Podcast");
+    var bookTitle = $("<div>").text(response.docs[0].title);
+    var authorText = $("<div>").text(response.docs[0].author_name);
+
+    bookResult.append(searchBtn, bookTitle, authorText);
+    bookList.append(bookResult);
+
+
     getBookInformation(response.docs[0].key).then(function (bookResponse) {
       console.log(bookResponse);
     });
   });
+
+
 
   listenApiSearch({
     q: 'the zodiac killer',
@@ -112,4 +128,7 @@ function listenApiGetPodcast(podcastId) {
       'X-ListenAPI-Key': listenKey,
     },
   });
+
+
+
 }
