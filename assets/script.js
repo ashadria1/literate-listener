@@ -137,13 +137,12 @@ function listenApiGetPodcast(podcastId) {
       'X-ListenAPI-Key': listenKey,
     },
   });
-<<<<<<< HEAD
 }
 
 function showPodcastEpisodeResults(results) {
     // Empty container element
     $('#site-description').addClass('d-none');
-    $('#hidden').empty().attr('style', 'display: block;');
+    $('#podcast-list').empty().attr('style', 'display: block;');
 
     results.forEach(function (item) {
         var div = $('<div>').addClass('clearfix border');
@@ -157,14 +156,14 @@ function showPodcastEpisodeResults(results) {
         //     genresDiv.append(span);
         // });
         div.append(img, epTitle, podTitle, epDesc, genresDiv);
-        $('#hidden').append(div);
+        $('#podcast-list').append(div);
     });
 }
 
 function showPodcastResults(results) {
     // Empty container element
     $('#site-description').addClass('d-none');
-    $('#hidden').empty().addClass('d-block');
+    $('#podcast-list').empty().addClass('d-block');
 
     results.forEach(function (item) {
         var div = $('<div>').addClass('clearfix border');
@@ -177,11 +176,6 @@ function showPodcastResults(results) {
         //     genresDiv.append(span);
         // });
         div.append(img, podTitle, podDesc);
-        $('#hidden').append(div);
+        $('#podcast-list').append(div);
     });
-=======
-
-
-
->>>>>>> main
 }
