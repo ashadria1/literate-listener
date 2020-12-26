@@ -11,7 +11,6 @@ $(document).ready(function () {
   // Comments go here.
   // */
 
-
   // listenApiSearch({
   //   q: "The Lord of the Rings",
   // }).then(function (response) {
@@ -107,42 +106,46 @@ function listenApiGetPodcast(podcastId) {
 
 function showPodcastEpisodeResults(results) {
   // Empty container element
-  $('#site-description').addClass('d-none');
-  $('#podcast-list').empty().attr('style', 'display: block;');
+  $("#site-description").addClass("d-none");
+  $("#podcast-list").empty().attr("style", "display: block;");
 
   results.forEach(function (item) {
-    var div = $('<div>').addClass('clearfix border');
-    var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
-    var epTitle = $('<p>').text(item.title_original);
-    var podTitle = $('<p>').text(item.podcast.title_original);
-    var epDesc = $('<p>').text(item.description_original);
-    var genresDiv = $('<p>');
+    var div = $("<div>").addClass("clearfix border");
+    var img = $("<img>")
+      .attr("src", item.thumbnail)
+      .addClass("float-start me-3");
+    var epTitle = $("<p>").text(item.title_original);
+    var podTitle = $("<p>").text(item.podcast.title_original);
+    var epDesc = $("<p>").text(item.description_original);
+    var genresDiv = $("<p>");
     // item.podcast.genre_ids.forEach(function (id) {
     //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
     //     genresDiv.append(span);
     // });
     div.append(img, epTitle, podTitle, epDesc, genresDiv);
-    $('#podcast-list').append(div);
+    $("#podcast-list").append(div);
   });
 }
 
 function showPodcastResults(results) {
   // Empty container element
-  $('#site-description').addClass('d-none');
-  $('#podcast-list').empty().addClass('d-block');
+  $("#site-description").addClass("d-none");
+  $("#podcast-list").empty().addClass("d-block");
 
   results.forEach(function (item) {
-    var div = $('<div>').addClass('clearfix border');
-    var img = $('<img>').attr('src', item.thumbnail).addClass('float-start me-3');
-    var podTitle = $('<p>').text(item.title_original);
-    var podDesc = $('<p>').text(item.description_original);
-    var genresDiv = $('<p>');
+    var div = $("<div>").addClass("clearfix border");
+    var img = $("<img>")
+      .attr("src", item.thumbnail)
+      .addClass("float-start me-3");
+    var podTitle = $("<p>").text(item.title_original);
+    var podDesc = $("<p>").text(item.description_original);
+    var genresDiv = $("<p>");
     // item.podcast.genre_ids.forEach(function (id) {
     //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
     //     genresDiv.append(span);
     // });
     div.append(img, podTitle, podDesc);
-    $('#podcast-list').append(div);
+    $("#podcast-list").append(div);
   });
 }
 
@@ -151,13 +154,12 @@ $("#search-button").on("click", function (event) {
   var inputTitle = $("#book-search").val().trim();
   var inputAuthor = $("#author-search").val().trim();
 
-
-  var queryObj = {}
-  if (inputAuthor !== '') {
+  var queryObj = {};
+  if (inputAuthor !== "") {
     queryObj.author = inputAuthor;
   }
 
-  if (inputTitle !== '') {
+  if (inputTitle !== "") {
     queryObj.title = inputTitle;
   }
 
@@ -170,11 +172,25 @@ $("#search-button").on("click", function (event) {
     var bookList = $("#books-list");
 
     for (var i = 0; i < 10; i++) {
-
       var responseImg = response.docs[i].cover_i;
       var bookResult = $("<div>").attr("style", "display:flex");
       var textResult = $("<div>").addClass("ps-2 flex-grow-1");
-      var searchBtn = $("<button>").text("Podcast");
+      var searchBtn = $("<button>")
+      
+      searchBtn.text("Podcast")
+
+        searchBtn.attr("data-title",  response.docs[i].title);
+        searchBtn.attr("data-author", response.docs[i].author_name);
+        // {
+        //   first: response.docs[i].title,
+        //   last: response.docs[i].author_name,
+        // });
+
+        
+      console.log(searchBtn.attr("data-title"));
+      console.log(searchBtn.attr("data-author"));
+      searchBtn.addClass("listen-btn");
+
       var bookTitle = $("<div>").text(response.docs[i].title);
       var authorText = $("<div>").text(response.docs[i].author_name);
       var coverImage = $("<img>").attr(
@@ -189,7 +205,18 @@ $("#search-button").on("click", function (event) {
       textResult.append(bookTitle, authorText, bookLink);
       bookResult.append(coverImage, textResult, searchBtn);
       bookList.append(bookResult);
+
+  
     }
+
+    $(".listen-btn").on("click", function() {
+      console.log($(this).attr("data-title"));
+      console.log($(this).attr("data-author"));
+
+    
+      });
+    
+  
 
     // getBookInformation(response.docs[0].key).then(function (bookResponse) {
     //   console.log("Hello ", bookResponse);
@@ -199,6 +226,6 @@ $("#search-button").on("click", function (event) {
     // });
   });
 
+  
+});
 
-
-})
