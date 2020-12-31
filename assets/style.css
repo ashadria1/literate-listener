@@ -25,3 +25,7 @@ img{
   font-weight: bold;
   background-color: white;
 }
+
+#podcast-search-form {
+  display: none;
+}

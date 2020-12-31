@@ -149,7 +149,7 @@ function showPodcastResults(results) {
   });
 }
 
-$("#search-button").on("click", function (event) {
+$("#book-search-button").on("click", function (event) {
   event.preventDefault();
   var inputTitle = $("#book-search").val().trim();
   var inputAuthor = $("#author-search").val().trim();
@@ -229,3 +229,28 @@ $("#search-button").on("click", function (event) {
   
 });
 
+$('#podcast-search-button').on('click', function (e) {
+    e.preventDefault();
+    var podcastInput = $('#podcast-search').val().trim();
+
+    var queryObj = {};
+
+    if (podcastInput !== '') {
+        queryObj.q = podcastInput;
+    }
+
+    listenApiSearch(queryObj).then(function (response) {
+        console.log(response);
+    });
+});
+
+$('[name=search-type]').on('input', function(e) {
+    var which = $(this).val();
+    if (which === 'book') {
+        $('#podcast-search-form').attr('style', 'display: none;');
+        $('#book-search-form').attr('style', 'display: block;');
+    } else if (which === 'podcast') {
+        $('#podcast-search-form').attr('style', 'display: block;');
+        $('#book-search-form').attr('style', 'display: none;');
+    }
+})

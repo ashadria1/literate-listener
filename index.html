@@ -23,7 +23,20 @@
       <header class="h1 bg-warning">The Literate Listener</header>
       <div class="row mt-5">
         <div class="col-sm-4 mx-auto">
-          <form>
+          <div class="mb-3">
+            <input type="radio" name="search-type" id="searchChoiceBook" value="book" checked>
+            <label for="searchChoiceBook">Books</label>
+            <input type="radio" name="search-type" id="searchChoicePodcast" value="podcast">
+            <label for="searchChoicePodcast">Podcasts</label>
+          </div>
+          <form id="podcast-search-form">
+            <div class="mb-3">
+              <label for="podcast-search">Podcast Name:</label>
+              <input type="text" placeholder="Podcast name" class="form-control" id="podcast-search">
+            </div>
+            <button type="submit" class="btn btn-primary" id="podcast-search-button">Search</button>
+          </form>
+          <form id="book-search-form">
             <div class="mb-3">
               <label for="book-search" class="form-label"
                 >Enter Book Title</label
@@ -35,7 +48,6 @@
                 id="book-search"
               />
             </div>
-
             <div class="mb-3">
               <label for="book-search" class="form-label">Enter Author</label>
               <input
@@ -45,41 +57,7 @@
                 id="author-search"
               />
             </div>
-
-            <!-- Check Boxes -->
-
-            <!-- <div class="mb-3 form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="title-search"
-              />
-              <label class="form-check-label" for="exampleCheck1"
-                >Search by Title</label
-              >
-            </div>
-            <div class="mb-3 form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="author-search"
-              />
-              <label class="form-check-label" for="exampleCheck1"
-                >Search by Author</label
-              >
-            </div>
-            <div class="mb-3 form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="genre-search"
-              />
-              <label class="form-check-label" for="exampleCheck1"
-                >Search by Genre</label
-              >
-            </div> -->
-
-            <button type="submit" class="btn btn-primary" id="search-button">Search</button>
+            <button type="submit" class="btn btn-primary" id="book-search-button">Search</button>
           </form>
         </div>
       </div>
