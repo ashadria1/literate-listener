@@ -18,10 +18,9 @@ img{
 }
 
 /* Classes */
-.listen-btn {
+/* .listen-btn {
   border-radius: 40%;
-  background-color: lightgrey;
-}
+} */
 
 .listen-btn:hover {
   background-color: rgb(106, 196, 154);
