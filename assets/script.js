@@ -171,25 +171,15 @@ $("#search-button").on("click", function (event) {
     $("#hidden").attr("style", "display: block");
     var bookList = $("#books-list");
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < response.docs.length; i++) {
       var responseImg = response.docs[i].cover_i;
       var bookResult = $("<div>").attr("style", "display:flex");
       var textResult = $("<div>").addClass("ps-2 flex-grow-1");
-      var searchBtn = $("<button>")
-      
-      searchBtn.text("Podcast")
-
-        searchBtn.attr("data-title",  response.docs[i].title);
-        searchBtn.attr("data-author", response.docs[i].author_name);
-        // {
-        //   first: response.docs[i].title,
-        //   last: response.docs[i].author_name,
-        // });
-
+      var searchTitleBtn = $("<button>").text('Search Title').attr('data-title', response.docs[i].title);
+      var searchAuthorBtn = $("<button>").text('Search Author').attr('data-author', response.docs[i].author_name);
         
-      console.log(searchBtn.attr("data-title"));
-      console.log(searchBtn.attr("data-author"));
-      searchBtn.addClass("listen-btn");
+      searchTitleBtn.addClass("search-title-btn");
+      searchAuthorBtn.addClass('search-author-btn');
 
       var bookTitle = $("<div>").text(response.docs[i].title);
       var authorText = $("<div>").text(response.docs[i].author_name);
@@ -203,27 +193,40 @@ $("#search-button").on("click", function (event) {
       bookLink.attr("href", "https://openlibrary.org/" + response.docs[i].key);
 
       textResult.append(bookTitle, authorText, bookLink);
-      bookResult.append(coverImage, textResult, searchBtn);
+      bookResult.append(coverImage, textResult, searchTitleBtn, searchAuthorBtn);
       bookList.append(bookResult);
 
   
     }
 
-    $(".listen-btn").on("click", function() {
-      console.log($(this).attr("data-title"));
-      console.log($(this).attr("data-author"));
+    $('.search-title-btn').on('click', function () {
+      console.log($(this).attr('data-title'));
+      var title = $(this).attr('data-title');
+      var queryObj = {};
+      if (title && title !== '') {
+          queryObj.q = title;
+      }
 
-    
+      listenApiSearch(queryObj).then(function (podResponse) {
+        console.log(podResponse);
+        showPodcastEpisodeResults(podResponse.results);
       });
+    });
     
-  
+    $('.search-author-btn').on('click', function () {
+      console.log($(this).attr('data-author'));
+      var author = $(this).attr('data-author');
+      var queryObj = {};
+      if (author && author !== '') {
+        queryObj.q = author;
+      }
 
-    // getBookInformation(response.docs[0].key).then(function (bookResponse) {
-    //   console.log("Hello ", bookResponse);
+      listenApiSearch(queryObj).then(function (podResponse) {
+        console.log(podResponse);
+        showPodcastEpisodeResults(podResponse.results);
+      });
+    });
 
-    //   var description = $("<div>").text(bookResponse.description);
-    //   textResult.append(description);
-    // });
   });
 
   
