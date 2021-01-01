@@ -122,7 +122,8 @@ function showPodcastEpisodeResults(results) {
     //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
     //     genresDiv.append(span);
     // });
-    div.append(img, epTitle, podTitle, epDesc, genresDiv);
+    var playBtn = $('<button>').text('Play').attr('data-src', item.audio).addClass('btn btn-dark play-btn');
+    div.append(img, epTitle, podTitle, epDesc, genresDiv, playBtn);
     $("#podcast-list").append(div);
   });
 }
@@ -238,3 +239,6 @@ $("#search-button").on("click", function (event) {
   
 });
 
+$('#podcast-list').on('click', '.play-btn', function() {
+    $('audio').attr('src', $(this).attr('data-src'));
+});
