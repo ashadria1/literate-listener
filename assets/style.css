@@ -11,13 +11,15 @@ img{
 
 /* Classes */
 
-
+.concept {
+  background-color: salmon;
+}
 
 /* Id's */
 
-#hidden {
+/* #hidden {
   display: none;
-}
+} */
 
 #site-description {
   font-family: Garamond, serif;
