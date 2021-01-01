@@ -11,17 +11,17 @@ $(document).ready(function () {
   // Comments go here.
   // */
 
-  // listenApiSearch({
-  //   q: "The Lord of the Rings",
-  // }).then(function (response) {
-  //   console.log(response);
-  //   showPodcastEpisodeResults(response.results);
-  //   listenApiGetPodcast(response.results[0].podcast.id).then(function (
-  //     podResponse
-  //   ) {
-  //     console.log(podResponse);
-  //   });
-  // });
+//   listenApiSearch({
+//     q: "The Lord of the Rings",
+//   }).then(function (response) {
+//     console.log(response);
+//     showPodcastEpisodeResults(response.results);
+//     listenApiGetPodcast(response.results[0].podcast.id).then(function (
+//       podResponse
+//     ) {
+//       console.log(podResponse);
+//     });
+//   });
 });
 
 /*
@@ -189,7 +189,7 @@ $("#search-button").on("click", function (event) {
         
       console.log(searchBtn.attr("data-title"));
       console.log(searchBtn.attr("data-author"));
-      searchBtn.addClass("listen-btn");
+      searchBtn.addClass("my-4 mr-3 btn btn-dark listen-btn");
 
       var bookTitle = $("<div>").text(response.docs[i].title);
       var authorText = $("<div>").text(response.docs[i].author_name);
