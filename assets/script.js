@@ -170,9 +170,11 @@ $("#search-button").on("click", function (event) {
     $("#site-description").attr("style", "display: none");
     $("#hidden").attr("style", "display: block");
     var bookList = $("#books-list");
+    var podcastList = $('#podcast-list');
 
     if (bookList !== null) {
       bookList.empty();
+      podcastList.empty();
     }
     
     for (var i = 0; i < response.docs.length; i++) {
