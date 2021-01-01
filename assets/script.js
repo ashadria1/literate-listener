@@ -1,4 +1,5 @@
 var listenKey = "4f3fcf91ea69455db9ab9bad6c285f61";
+var ibmAuth = 'apikey:NugC2Ibafp24cft_C9L7uqMSsR_91BvLsD-g2q1R-tGU';
 $(document).ready(function () {
   console.log("Hello world!");
   // /*
@@ -23,6 +24,18 @@ $(document).ready(function () {
   //   });
   // });
 });
+
+function ibmAnalayze(queryObj) {
+    var baseUrl = 'https://0f967566.us-south.apigw.appdomain.cloud/nluproxy?';
+    baseUrl += $.param(queryObj);
+    return $.ajax({
+        url: baseUrl,
+        method: 'GET',
+        headers: {
+            'authorization': `basic ${btoa(ibmAuth)}`
+        }
+    });
+}
 
 /*
  * Expects an object in the form of
@@ -122,7 +135,26 @@ function showPodcastEpisodeResults(results) {
     //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
     //     genresDiv.append(span);
     // });
-    div.append(img, epTitle, podTitle, epDesc, genresDiv);
+    var btn = $('<button>').text('Analyze');
+    btn.on('click', function(e) {
+        var queryObj = {};
+        queryObj.version = '2020-08-01';
+        queryObj.features = 'categories,concepts,entities,keywords';
+        queryObj.text = item.title_original + " " + item.description_original;
+        ibmAnalayze(queryObj).then((response) => {
+            console.log(response);
+            console.log(this);
+            var conceptsDiv = $('<div>');
+            response.concepts.forEach(concept => {
+                var conceptSpan = $('<span>').text(concept.text).addClass('concept');
+                conceptsDiv.append(conceptSpan);
+            });
+            $(this).replaceWith(conceptsDiv);
+        }, (_, statusText, errorThrown) => {
+            $(this).replaceWith("Sorry, couldn't analyze this.");
+        });
+    });
+    div.append(img, epTitle, podTitle, epDesc, genresDiv, btn);
     $("#podcast-list").append(div);
   });
 }
@@ -241,6 +273,7 @@ $('#podcast-search-button').on('click', function (e) {
 
     listenApiSearch(queryObj).then(function (response) {
         console.log(response);
+        showPodcastEpisodeResults(response.results);
     });
 });
 
@@ -254,3 +287,49 @@ $('[name=search-type]').on('input', function(e) {
         $('#book-search-form').attr('style', 'display: none;');
     }
 })
+
+$(document).on('click', '.concept', function (e) {
+  console.log(this);
+  var queryObj = { q: $(this).text() };
+  searchOpenLibrary(queryObj).then(function (response) {
+    console.log(response);
+
+    var bookList = $('#books-list');
+
+    for (var i = 0; i < response.docs.length; i++) {
+      var responseImg = response.docs[i].cover_i;
+      var bookResult = $('<div>').attr('style', 'display:flex');
+      var textResult = $('<div>').addClass('ps-2 flex-grow-1');
+      var searchBtn = $('<button>');
+
+      searchBtn.text('Podcast');
+
+      searchBtn.attr('data-title', response.docs[i].title);
+      searchBtn.attr('data-author', response.docs[i].author_name);
+
+      console.log(searchBtn.attr('data-title'));
+      console.log(searchBtn.attr('data-author'));
+      searchBtn.addClass('listen-btn');
+
+      var bookTitle = $('<div>').text(response.docs[i].title);
+      var authorText = $('<div>').text(response.docs[i].author_name);
+      var coverImage = $('<img>').attr(
+        'src',
+        'http://covers.openlibrary.org/b/id/' + responseImg + '-M.jpg'
+      );
+      var bookLink = $('<a>').text(
+        'For complete book description, click here.'
+      );
+      bookLink.attr('href', 'https://openlibrary.org/' + response.docs[i].key);
+
+      textResult.append(bookTitle, authorText, bookLink);
+      bookResult.append(coverImage, textResult, searchBtn);
+      bookList.append(bookResult);
+    }
+
+    $('.listen-btn').on('click', function () {
+      console.log($(this).attr('data-title'));
+      console.log($(this).attr('data-author'));
+    });
+  });
+});
