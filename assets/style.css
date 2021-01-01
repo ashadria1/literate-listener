@@ -27,6 +27,11 @@ img{
   color: white;
 }
 
+.episode-description {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
 /* Id's */
 
 #hidden {

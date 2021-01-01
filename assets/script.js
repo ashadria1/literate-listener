@@ -116,7 +116,7 @@ function showPodcastEpisodeResults(results) {
       .addClass("float-start me-3");
     var epTitle = $("<p>").text(item.title_original);
     var podTitle = $("<p>").text(item.podcast.title_original);
-    var epDesc = $("<p>").text(item.description_original);
+    var epDesc = $("<p>").text(item.description_original).addClass('episode-description');
     var genresDiv = $("<p>");
     // item.podcast.genre_ids.forEach(function (id) {
     //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
