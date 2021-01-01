@@ -1,7 +1,15 @@
 /* Elements */
+body {
+  margin: 0;  
+  background-image: linear-gradient(rgb(106, 196, 154), rgb(174, 209, 197), rgb(208, 216, 213));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
 header {
   text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bolder;
 }
 
 img{
@@ -10,8 +18,14 @@ img{
 }
 
 /* Classes */
+/* .listen-btn {
+  border-radius: 40%;
+} */
 
-
+.listen-btn:hover {
+  background-color: rgb(106, 196, 154);
+  color: white;
+}
 
 /* Id's */
 
@@ -23,5 +37,4 @@ img{
   font-family: Garamond, serif;
   font-size: 24px;
   font-weight: bold;
-  background-color: white;
 }

@@ -11,17 +11,17 @@ $(document).ready(function () {
   // Comments go here.
   // */
 
-  // listenApiSearch({
-  //   q: "The Lord of the Rings",
-  // }).then(function (response) {
-  //   console.log(response);
-  //   showPodcastEpisodeResults(response.results);
-  //   listenApiGetPodcast(response.results[0].podcast.id).then(function (
-  //     podResponse
-  //   ) {
-  //     console.log(podResponse);
-  //   });
-  // });
+//   listenApiSearch({
+//     q: "The Lord of the Rings",
+//   }).then(function (response) {
+//     console.log(response);
+//     showPodcastEpisodeResults(response.results);
+//     listenApiGetPodcast(response.results[0].podcast.id).then(function (
+//       podResponse
+//     ) {
+//       console.log(podResponse);
+//     });
+//   });
 });
 
 /*
@@ -178,8 +178,8 @@ $("#search-button").on("click", function (event) {
       var searchTitleBtn = $("<button>").text('Search Title').attr('data-title', response.docs[i].title);
       var searchAuthorBtn = $("<button>").text('Search Author').attr('data-author', response.docs[i].author_name);
         
-      searchTitleBtn.addClass("search-title-btn");
-      searchAuthorBtn.addClass('search-author-btn');
+      searchTitleBtn.addClass("search-title-btn my-4 mr-3 btn btn-dark listen-btn");
+      searchAuthorBtn.addClass('search-author-btn my-4 mr-3 btn btn-dark listen-btn');
 
       var bookTitle = $("<div>").text(response.docs[i].title);
       var authorText = $("<div>").text(response.docs[i].author_name);
