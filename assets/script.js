@@ -171,6 +171,10 @@ $("#search-button").on("click", function (event) {
     $("#hidden").attr("style", "display: block");
     var bookList = $("#books-list");
 
+    if (bookList !== null) {
+      bookList.empty();
+    }
+    
     for (var i = 0; i < 10; i++) {
       var responseImg = response.docs[i].cover_i;
       var bookResult = $("<div>").attr("style", "display:flex");
