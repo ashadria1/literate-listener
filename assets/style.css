@@ -17,6 +17,10 @@ img{
   height: 90px;
 }
 
+audio{
+  display: none;
+}
+
 /* Classes */
 /* .listen-btn {
   border-radius: 40%;
