@@ -259,5 +259,8 @@ $("#search-button").on("click", function (event) {
 });
 
 $("#podcast-list").on("click", ".play-btn", function () {
+  // Gives the audio element the src attribute of the podcast
   $("audio").attr("src", $(this).attr("data-src"));
+  // Displays the audio element on the page
+  $("audio").attr("style", "display: block");
 });
