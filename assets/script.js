@@ -172,6 +172,11 @@ $("#search-button").on("click", function (event) {
     var bookList = $("#books-list");
 
     for (var i = 0; i < 10; i++) {
+
+      //Limit the amount of books shown
+      if (i === 5) {
+        break;
+      }
       var responseImg = response.docs[i].cover_i;
       var bookResult = $("<div>").attr("style", "display:flex");
       var textResult = $("<div>").addClass("ps-2 flex-grow-1");
