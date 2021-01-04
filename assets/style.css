@@ -46,6 +46,10 @@ audio{
   width: 130px;
 }
 
+.spinner-border{
+  display: none;
+}
+
 /* Id's */
 
 #hidden {

@@ -159,6 +159,7 @@ $("#search-button").on("click", function (event) {
   event.preventDefault();
   var inputTitle = $("#book-search").val().trim();
   var inputAuthor = $("#author-search").val().trim();
+  var spinner = $(".spinner-border").attr("style", "display: block");
 
   var queryObj = {};
   if (inputAuthor !== "") {
@@ -187,6 +188,7 @@ $("#search-button").on("click", function (event) {
 
       // Only shows 10 results
       if (i === 10) {
+        spinner.attr("style", "display: none");
         break;
       }
 
