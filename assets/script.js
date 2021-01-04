@@ -190,6 +190,7 @@ $("#book-search-button").on("click", function (event) {
   event.preventDefault();
   var inputTitle = $("#book-search").val().trim();
   var inputAuthor = $("#author-search").val().trim();
+  var spinner = $(".spinner-border").attr("style", "display: block");
 
   var queryObj = {};
   if (inputAuthor !== "") {
@@ -218,6 +219,7 @@ $("#book-search-button").on("click", function (event) {
 
       // Only shows 10 results
       if (i === 10) {
+        spinner.attr("style", "display: none");
         break;
       }
 
@@ -232,10 +234,10 @@ $("#book-search-button").on("click", function (event) {
         .attr("data-author", response.docs[i].author_name);
 
       searchTitleBtn.addClass(
-        "search-title-btn my-4 mr-3 btn btn-dark listen-btn"
+        "search-title-btn my-4 me-3 btn btn-dark listen-btn"
       );
       searchAuthorBtn.addClass(
-        "search-author-btn my-4 mr-3 btn btn-dark listen-btn"
+        "search-author-btn my-4 me-3 btn btn-dark listen-btn"
       );
 
       var bookTitle = $("<div>").text(response.docs[i].title);
@@ -250,8 +252,9 @@ $("#book-search-button").on("click", function (event) {
       bookLink.attr("href", "https://openlibrary.org/" + response.docs[i].key);
 
       textResult.append(bookTitle, authorText, bookLink);
+      var imageHolder = $('<div>').append(coverImage);
       bookResult.append(
-        coverImage,
+        imageHolder,
         textResult,
         searchTitleBtn,
         searchAuthorBtn
