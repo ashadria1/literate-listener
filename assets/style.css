@@ -26,10 +26,6 @@ audio{
   border-radius: 40%;
 } */
 
-.concept {
-  background-color: salmon;
-}
-
 .listen-btn:hover {
   background-color: rgb(106, 196, 154);
   color: white;

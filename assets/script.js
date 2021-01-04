@@ -136,16 +136,21 @@ function showPodcastEpisodeResults(results) {
     btn.on('click', function(e) {
         var queryObj = {};
         queryObj.version = '2020-08-01';
-        queryObj.features = 'categories,concepts,entities,keywords';
+        queryObj.features = 'concepts,entities,keywords';
         queryObj.text = item.title_original + ". " + item.description_original;
         ibmAnalayze(queryObj).then((response) => {
+            var allResults = [].concat(response.concepts, response.entities, response.keywords);
             console.log(response);
+            console.log({allResults})
+            var analysisResultsEl = $('<div>');
             var conceptsDiv = $('<div>');
-            response.concepts.forEach(concept => {
-                var conceptSpan = $('<button>').text(concept.text).addClass('concept');
-                conceptsDiv.append(conceptSpan);
+            conceptsDiv.append($('<h3>').text('Analysis results'));
+            allResults.sort((a, b) => b.relevance - a.relevance).filter(thing => thing.relevance >= 0.5).forEach(concept => {
+                var conceptBtn = $('<button>').text(concept.text).addClass('btn btn-dark concept');
+                conceptsDiv.append(conceptBtn);
             });
-            $(this).replaceWith(conceptsDiv);
+            analysisResultsEl.append(conceptsDiv);
+            $(this).replaceWith(analysisResultsEl);
         }, (_, statusText, errorThrown) => {
             $(this).replaceWith("Sorry, couldn't analyze this.");
         });
@@ -354,10 +359,12 @@ $(document).on('click', '.concept', function (e) {
 
       var bookTitle = $("<div>").text(response.docs[i].title);
       var authorText = $("<div>").text(response.docs[i].author_name);
+      var imageHolder = $('<div>');
       var coverImage = $("<img>").attr(
         "src",
         "http://covers.openlibrary.org/b/id/" + responseImg + "-M.jpg"
       );
+      imageHolder.append(coverImage);
       var bookLink = $("<a>").text(
         "For complete book description, click here."
       );
@@ -365,7 +372,7 @@ $(document).on('click', '.concept', function (e) {
 
       textResult.append(bookTitle, authorText, bookLink);
       bookResult.append(
-        coverImage,
+        imageHolder,
         textResult,
         searchTitleBtn,
         searchAuthorBtn
@@ -402,6 +409,7 @@ $(document).on('click', '.concept', function (e) {
     });
   });
 });
+
 $("#podcast-list").on("click", ".play-btn", function () {
   // Gives the audio element the src attribute of the podcast
   $("audio").attr("src", $(this).attr("data-src"));
