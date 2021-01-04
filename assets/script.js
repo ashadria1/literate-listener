@@ -138,7 +138,9 @@ function showPodcastEpisodeResults(results) {
         queryObj.version = '2020-08-01';
         queryObj.features = 'concepts,entities,keywords';
         queryObj.text = item.title_original + ". " + item.description_original;
+        var spinner = $(".spinner-border").attr("style", "display: block");
         ibmAnalayze(queryObj).then((response) => {
+          spinner.attr("style", "display: none");
             var allResults = [].concat(response.concepts, response.entities, response.keywords);
             console.log(response);
             console.log({allResults})
@@ -268,9 +270,11 @@ $("#book-search-button").on("click", function (event) {
       var queryObj = {};
       if (title && title !== "") {
         queryObj.q = title;
+        var spinner = $(".spinner-border").attr("style", "display: block");
       }
 
       listenApiSearch(queryObj).then(function (podResponse) {
+        spinner.attr("style", "display: none");
         console.log(podResponse);
         showPodcastEpisodeResults(podResponse.results);
       });
@@ -282,9 +286,11 @@ $("#book-search-button").on("click", function (event) {
       var queryObj = {};
       if (author && author !== "") {
         queryObj.q = author;
+        var spinner = $(".spinner-border").attr("style", "display: block");
       }
 
       listenApiSearch(queryObj).then(function (podResponse) {
+        spinner.attr("style", "display: none");
         console.log(podResponse);
         showPodcastEpisodeResults(podResponse.results);
       });
@@ -295,6 +301,7 @@ $("#book-search-button").on("click", function (event) {
 $('#podcast-search-button').on('click', function (e) {
     e.preventDefault();
     var podcastInput = $('#podcast-search').val().trim();
+    var spinner = $(".spinner-border").attr("style", "display: block");
 
     var queryObj = {};
 
@@ -304,6 +311,7 @@ $('#podcast-search-button').on('click', function (e) {
     }
 
     listenApiSearch(queryObj).then(function (response) {
+      spinner.attr("style", "display: none");
         console.log(response);
         $('#hidden').addClass('d-block');
         showPodcastEpisodeResults(response.results);
@@ -322,9 +330,11 @@ $('[name=search-type]').on('input', function(e) {
 })
 
 $(document).on('click', '.concept', function (e) {
+  var spinner = $(".spinner-border").attr("style", "display: block");
   console.log(this);
   var queryObj = { q: $(this).text() };
   searchOpenLibrary(queryObj).then(function (response) {
+    spinner.attr("style", "display: none");
       console.log(response);
 
     $("#site-description").attr("style", "display: none");
