@@ -201,10 +201,10 @@ $("#search-button").on("click", function (event) {
         .attr("data-author", response.docs[i].author_name);
 
       searchTitleBtn.addClass(
-        "search-title-btn my-4 mr-3 btn btn-dark listen-btn"
+        "search-title-btn my-4 me-3 btn btn-dark listen-btn"
       );
       searchAuthorBtn.addClass(
-        "search-author-btn my-4 mr-3 btn btn-dark listen-btn"
+        "search-author-btn my-4 me-3 btn btn-dark listen-btn"
       );
 
       var bookTitle = $("<div>").text(response.docs[i].title);
