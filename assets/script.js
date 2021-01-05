@@ -1,29 +1,6 @@
 var listenKey = "4f3fcf91ea69455db9ab9bad6c285f61";
 var ibmAuth = 'apikey:NugC2Ibafp24cft_C9L7uqMSsR_91BvLsD-g2q1R-tGU';
-$(document).ready(function () {
-  console.log("Hello world!");
-  // /*
-  // Comments go here.
-  // Comments go here.
-  // Comments go here.
-  // Comments go here.
-  // Comments go here.
-  // Comments go here.
-  // Comments go here.
-  // */
 
-  //   listenApiSearch({
-  //     q: "The Lord of the Rings",
-  //   }).then(function (response) {
-  //     console.log(response);
-  //     showPodcastEpisodeResults(response.results);
-  //     listenApiGetPodcast(response.results[0].podcast.id).then(function (
-  //       podResponse
-  //     ) {
-  //       console.log(podResponse);
-  //     });
-  //   });
-});
 
 function ibmAnalayze(queryObj) {
     var baseUrl = 'https://0f967566.us-south.apigw.appdomain.cloud/nluproxy?';
@@ -142,8 +119,6 @@ function showPodcastEpisodeResults(results) {
         ibmAnalayze(queryObj).then((response) => {
           spinner.attr("style", "display: none");
             var allResults = [].concat(response.concepts, response.entities, response.keywords);
-            console.log(response);
-            console.log({allResults})
             var analysisResultsEl = $('<div>');
             var conceptsDiv = $('<div>');
             conceptsDiv.append($('<h3>').text('Analysis results'));
@@ -178,11 +153,6 @@ function showPodcastResults(results) {
       .addClass("float-start me-3");
     var podTitle = $("<p>").text(item.title_original);
     var podDesc = $("<p>").text(item.description_original);
-    var genresDiv = $("<p>");
-    // item.podcast.genre_ids.forEach(function (id) {
-    //     var span = $('<span>').text(id).addClass('border rounded-pill p-2 me-3');
-    //     genresDiv.append(span);
-    // });
     div.append(img, podTitle, podDesc);
     $("#podcast-list").append(div);
   });
@@ -205,7 +175,6 @@ $("#book-search-button").on("click", function (event) {
 
   // Example usage of the two APIs.
   searchOpenLibrary(queryObj).then(function (response) {
-    console.log(response);
 
     $("#site-description").attr("style", "display: none");
     $("#hidden").attr("style", "display: block");
@@ -265,7 +234,6 @@ $("#book-search-button").on("click", function (event) {
     }
 
     $(".search-title-btn").on("click", function () {
-      console.log($(this).attr("data-title"));
       var title = $(this).attr("data-title");
       var queryObj = {};
       if (title && title !== "") {
@@ -275,13 +243,11 @@ $("#book-search-button").on("click", function (event) {
 
       listenApiSearch(queryObj).then(function (podResponse) {
         spinner.attr("style", "display: none");
-        console.log(podResponse);
         showPodcastEpisodeResults(podResponse.results);
       });
     });
 
     $(".search-author-btn").on("click", function () {
-      console.log($(this).attr("data-author"));
       var author = $(this).attr("data-author");
       var queryObj = {};
       if (author && author !== "") {
@@ -291,7 +257,6 @@ $("#book-search-button").on("click", function (event) {
 
       listenApiSearch(queryObj).then(function (podResponse) {
         spinner.attr("style", "display: none");
-        console.log(podResponse);
         showPodcastEpisodeResults(podResponse.results);
       });
     });
@@ -312,7 +277,6 @@ $('#podcast-search-button').on('click', function (e) {
 
     listenApiSearch(queryObj).then(function (response) {
       spinner.attr("style", "display: none");
-        console.log(response);
         $('#hidden').addClass('d-block');
         showPodcastEpisodeResults(response.results);
     });
@@ -331,11 +295,9 @@ $('[name=search-type]').on('input', function(e) {
 
 $(document).on('click', '.concept', function (e) {
   var spinner = $(".spinner-border").attr("style", "display: block");
-  console.log(this);
   var queryObj = { q: $(this).text() };
   searchOpenLibrary(queryObj).then(function (response) {
     spinner.attr("style", "display: none");
-      console.log(response);
 
     $("#site-description").attr("style", "display: none");
     $("#hidden").attr("style", "display: block");
@@ -394,7 +356,6 @@ $(document).on('click', '.concept', function (e) {
     }
 
     $(".search-title-btn").on("click", function () {
-      console.log($(this).attr("data-title"));
       var title = $(this).attr("data-title");
       var queryObj = {};
       if (title && title !== "") {
@@ -402,13 +363,11 @@ $(document).on('click', '.concept', function (e) {
       }
 
       listenApiSearch(queryObj).then(function (podResponse) {
-        console.log(podResponse);
         showPodcastEpisodeResults(podResponse.results);
       });
     });
 
     $(".search-author-btn").on("click", function () {
-      console.log($(this).attr("data-author"));
       var author = $(this).attr("data-author");
       var queryObj = {};
       if (author && author !== "") {
@@ -416,7 +375,6 @@ $(document).on('click', '.concept', function (e) {
       }
 
       listenApiSearch(queryObj).then(function (podResponse) {
-        console.log(podResponse);
         showPodcastEpisodeResults(podResponse.results);
       });
     });

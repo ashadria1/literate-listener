@@ -22,10 +22,6 @@ audio{
 }
 
 /* Classes */
-/* .listen-btn {
-  border-radius: 40%;
-} */
-
 .listen-btn:hover {
   background-color: rgb(106, 196, 154);
   color: white;
@@ -51,7 +47,6 @@ audio{
 }
 
 /* Id's */
-
 #hidden {
   display: none;
 }
