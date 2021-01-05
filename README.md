@@ -45,8 +45,8 @@ Digging deep into the API and Bootstrap documentation can result in learning qui
 What makes our project stand out?
 It’s unique. It’s useful.  It has the potential to be even more useful in people’s everday lives, as we find new and creative ways to expand its functionality and features to include other related media in the future.
 
-Link to deployed page:
-https://glorvi23.github.io/project-1/
+Link to GitHub Repository:
+[GitHub](https://github.com/Glorvi23/literate-listener)
 
 
 ## Table of contents:
@@ -63,7 +63,7 @@ Installation steps:  Clone the repository to your local machine.
 
 ## Usage 
 
-Open `index.html` in your favorite browser or check out the live version [here](https://github.com/Glorvi23/project-1).
+Open `index.html` in your favorite browser or check out the live version [here](https://glorvi23.github.io/literate-listener).
 
 ![Main Literate Listener screen](assets/images/literate_listener_open_screen.png)
 ![Book search layout](assets/images/Literate_Listener_booksearch.png)
