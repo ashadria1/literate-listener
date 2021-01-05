@@ -1,5 +1,4 @@
-# Your Project Title
-The Literate Listener
+# The Literate Listener
 ## Description 
 
 
@@ -15,19 +14,24 @@ WHEN: I search for a book by title or author (or reverse-search for a podcast).
 THEN: I will receive a list of podcasts (or books, if reverse-searching) related to the book’s subject matter.
 
 
-Technologies Used:
-JavaScript- logic and Ajax
-Ajax- to make API calls
-Bootstrap- containers, alignment
-jQuery- DOM manioukation
-API's- 
-(others, maybe IBM, added by Bradley?)
+### Technologies Used:  
+- JavaScript: logic and Ajax  
+- Ajax: to make API calls  
+- Bootstrap: containers, alignment  
+- jQuery: DOM manipulation  
+- API's
+    - [Open Library](https://openlibrary.org/developers/api)
+    - [Listen Notes](https://www.listennotes.com/api/)
+    - [IBM Natural Language Understanding](https://cloud.ibm.com/apidocs/natural-language-understanding)
 
-Challenges Faced:
+### Challenges Faced:
 Flex containers and alignment were challenging due to the amount of query searches we were trying to bring together.  Coordinating the API's to perform their searches properly presented some challenges, as well.  Being able to parse out what terms to search for to get in to the query url.  CORS issues arose, as well.  
 
-Future Features:
-(added by Bradley?)
+### Future Features:
+- Use `localStorage` to allow a user to save podcast episodes they liked or books for future reading.
+- Improve on podcast to book suggestions.
+- Implement pagination on book and podcast results to see more than the intially displayed results.
+- Searching for books via subject/genre.
 
 Motivation:
 To capitalize on the interest one has in a particular subject, leveraging API's for enhanced search results.
@@ -45,7 +49,7 @@ Link to deployed page:
 https://glorvi23.github.io/project-1/
 
 
-Table of contents:
+## Table of contents:
 
 * [Installation](#installation)
 * [Usage](#usage)
@@ -55,20 +59,16 @@ Table of contents:
 
 ## Installation
 
-    Installation steps:  Clone the repository to your local machine.  
-    Link to repository:  https://github.com/Glorvi23/project-1
+Installation steps:  Clone the repository to your local machine.  
 
 ## Usage 
 
-(need new screenshot once it’s up and running)
+Open `index.html` in your favorite browser or check out the live version [here](https://github.com/Glorvi23/project-1).
 
-Provide instructions and examples for use. Include screenshots as needed. 
+![Main Literate Listener screen](assets/images/literate_listener_open_screen.png)
+![Book search layout](assets/images/Literate_Listener_booksearch.png)
+![Podcast search layout](assets/images/Literate_Listener_podsearch.png)
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-```md
-![alt text](assets/images/screenshot.png)
-```
 ## Credits
 Our collaborators with links to github profiles:
     Adrian Ash - https://github.com/ashadria1
@@ -104,8 +104,8 @@ SOFTWARE.
 ## Badges
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Glorvi23/project-1)
 ## Features
-    -book search by title/author
-    -podcast search once that list populates
-    -play the podcast from the site
-    -search for the podcast episodes  
+- book search by title/author
+- podcast search once that list populates
+- play the podcast from the site
+- search for the podcast episodes  
 
