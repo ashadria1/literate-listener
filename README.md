@@ -63,7 +63,7 @@ Installation steps:  Clone the repository to your local machine.
 
 ## Usage 
 
-Open `index.html` in your favorite browser or check out the live version [here](https://glorvi23.github.io/literate-listener).
+Open `index.html` in your favorite browser or check out the live version [here](https://ashadria1.github.io/literate-listener/).
 
 ![Main Literate Listener screen](assets/images/literate_listener_open_screen.png)
 ![Book search layout](assets/images/Literate_Listener_booksearch.png)
