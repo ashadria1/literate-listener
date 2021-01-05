@@ -1,7 +1,6 @@
-# Your Project Title
+# Project Title
 The Literate Listener
 ## Description 
-
 
 Our team has created a webpage that brings together the avid reader and the avid podcast listener who is interested in delving deeper into a topic that interests them.  This webpage will allow the user to enter the title of a book or author and receive a list of podcasts related to the same topics.  It can also perform a reverse search and provide the user with books related to topics covered in specific podcasts.  Using the Open Library API, we receive the book title, author, and description to populate the book field.  We then use the following returns to fill the podcast query URL: title, subjects, subject places, subject people.  The Listen API will return a list of podcasts in a playlist format so the user can click and play from the page.  
 
@@ -14,14 +13,13 @@ GIVEN: I am on the page
 WHEN: I search for a book by title or author (or reverse-search for a podcast).
 THEN: I will receive a list of podcasts (or books, if reverse-searching) related to the book’s subject matter.
 
-
 Technologies Used:
-JavaScript- logic and Ajax
-Ajax- to make API calls
-Bootstrap- containers, alignment
-jQuery- DOM manioukation
-API's- 
-(others, maybe IBM, added by Bradley?)
+    JavaScript- logic and Ajax
+    Ajax- to make API calls
+    Bootstrap- containers, alignment
+    jQuery- DOM manioukation
+    API's- 
+    (others, maybe IBM, added by Bradley?)
 
 Challenges Faced:
 Flex containers and alignment were challenging due to the amount of query searches we were trying to bring together.  Coordinating the API's to perform their searches properly presented some challenges, as well.  Being able to parse out what terms to search for to get in to the query url.  CORS issues arose, as well.  
@@ -51,7 +49,6 @@ Table of contents:
 * [Usage](#usage)
 * [Credits](#credits)
 * [License](#license)
-
 
 ## Installation
 
